@@ -2,9 +2,9 @@
 
 <!--- Describe your changes -->
 
-## Project
+## Changed areas
 
-<!--- What project was affected by these changes? Put an `x` in all the boxes that apply: -->
+<!--- What was affected by these changes? Put an `x` in all the boxes that apply: -->
 
 - [ ] Repo
 - [ ] Domain
