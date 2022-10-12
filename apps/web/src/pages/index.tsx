@@ -7,7 +7,7 @@ export default function Web() {
       <Head>
         {/** temporary title + icon */}
         <title>domain generator</title>
-        <link rel="icon" href="./assets/dog.png" />
+        {/* <link rel="icon" href="/assets/dog.png" /> */}
       </Head>
 
       <main>

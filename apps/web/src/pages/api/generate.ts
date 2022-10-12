@@ -1,10 +1,9 @@
-// route itself needs to go in here and logic goes in src/api
-
 import { NextApiRequest, NextApiResponse } from "next";
+import OpenApiService from "../../api/openai-service";
 
-const generateDomain = (req: NextApiRequest, res: NextApiResponse) => {
-  // in here I think we call the logic service and just return that response
-  res.status(200).json({ text: "Hello" });
+const generate = async (req: NextApiRequest, res: NextApiResponse) => {
+  const result = await OpenApiService.generateName(req.body.companyDescription);
+  res.status(200).json({ result });
 };
 
-export default generateDomain;
+export default generate;
