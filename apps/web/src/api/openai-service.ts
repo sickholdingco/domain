@@ -6,11 +6,15 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 const generateName = async (description: string) => {
-  const completion = await openai.createCompletion({
-    model: "text-davinci-002",
-    prompt: generatePrompt(description),
-    temperature: 0.6,
-  });
+  const completion = await openai
+    .createCompletion({
+      model: "text-davinci-002",
+      prompt: generatePrompt(description),
+      temperature: 0.6,
+    })
+    .catch(() => {
+      throw new Error("Error finding completion");
+    });
 
   if (completion.data.choices && completion.data.choices[0]) {
     return completion.data.choices[0].text;
