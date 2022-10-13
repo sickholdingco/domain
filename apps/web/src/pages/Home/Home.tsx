@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 
-export const Home = () => {
+const Home = () => {
   const [searchInput, setSearchInput] = useState("");
   const [result, setResult] = useState();
 
@@ -32,3 +32,5 @@ export const Home = () => {
     </div>
   );
 };
+
+export default Home;
