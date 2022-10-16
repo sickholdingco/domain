@@ -1,0 +1,28 @@
+name: Check types
+on:
+  pull_request_target:
+    branches:
+      - main
+    paths:
+      - "**.tsx?"
+jobs:
+  check-types:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 7.13.1
+
+      - name: Use Node 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "pnpm"
+
+      - name: Type-check
+      - run: yarn type-check
