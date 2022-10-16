@@ -12,7 +12,8 @@
     "dev": "turbo run dev --parallel",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "lint": "turbo run lint && manypkg check",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "type-check": "turbo run type-check"
   },
   "lint-staged": {
     "(apps|packages)/**/*.{js,ts,jsx,tsx}": [
