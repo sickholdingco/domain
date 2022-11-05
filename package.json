@@ -7,13 +7,14 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "turbo run build",
-    "clean": "rm -rf node_modules",
-    "dev": "turbo run dev --parallel",
+    "build": "turbo build",
+    "clean": "rimraf node_modules",
+    "dev": "turbo dev --parallel",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "lint": "turbo run lint && manypkg check",
+    "lint": "turbo lint",
     "prepare": "husky install",
-    "type-check": "turbo run type-check"
+    "package-check": "manypkg check",
+    "type-check": "turbo type-check"
   },
   "lint-staged": {
     "(apps|packages)/**/*.{js,ts,jsx,tsx}": [
@@ -25,13 +26,12 @@
     ]
   },
   "dependencies": {
-    "@manypkg/cli": "^0.19.2"
-  },
-  "devDependencies": {
+    "@manypkg/cli": "^0.19.2",
     "eslint-config-custom": "workspace:*",
     "husky": "^8.0.1",
     "lint-staged": "^12.5.0",
     "prettier": "latest",
+    "rimraf": "^3.0.2",
     "turbo": "latest"
   },
   "packageManager": "pnpm@7.13.1",
