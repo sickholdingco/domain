@@ -2,14 +2,21 @@
   "$schema": "https://turborepo.org/schema.json",
   "pipeline": {
     "build": {
-      "dependsOn": ["^build", "$OPENAI_API_KEY"],
+      "dependsOn": ["^build"],
+      "env": ["OPENAI_API_KEY"],
       "outputs": ["dist/**", ".next/**"]
     },
     "lint": {
       "outputs": []
     },
+    "type-check": {
+      "outputs": []
+    },
     "dev": {
       "cache": false
+    },
+    "type-check": {
+      "outputs": []
     }
   }
 }
