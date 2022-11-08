@@ -35,6 +35,7 @@
   },
   "packageManager": "pnpm@7.13.1",
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=16.0.0",
+    "yarn": "please-use-pnpm"
   }
 }
