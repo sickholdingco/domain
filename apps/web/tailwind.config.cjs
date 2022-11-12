@@ -5,6 +5,9 @@ module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      screens: {
+        smMax: { max: "767px" },
+      },
       fontFamily: {
         sans: ["Roboto Flex", "sans-serif", ...defaultTheme.fontFamily.sans],
       },

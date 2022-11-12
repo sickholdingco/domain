@@ -17,7 +17,7 @@ export const Footer = () => {
     <footer className="relative w-full flex items-center h-20 mt-10 pb-6 px-24">
       <div className="w-full flex justify-start items-center">
         <img src="./assets/gradient.jpeg" alt="gradient logo" className="h-5 w-5 rounded-full" />
-        <p className="pl-2 text-xs hidden md:flex">an shco production</p>
+        <p className="pl-2 text-xs hidden md:flex ">an shco production</p>
         <p className="pl-2 text-xs hidden smMax:flex">shco</p>
       </div>
       <div className="w-full flex justify-center">
