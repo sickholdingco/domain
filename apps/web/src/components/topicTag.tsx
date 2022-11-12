@@ -5,10 +5,10 @@ interface Props {
 }
 const TopicTag = ({ children, onClick }: Props) => {
   return (
-    <div className="py-[6px] pr-[10px] pl-3 rounded-2xl bg-product-purple w-fit text-[10px] flex items-center gap-[6px] text-white">
+    <div className="py-[10px] pl-[20px] pr-[16px] rounded-3xl bg-product-purple w-fit text-[16px] flex items-center gap-[10px] font-normal ">
       <div>{children}</div>
       <button type="button" onClick={onClick}>
-        <XMarkIcon className="h-[10px] w-[10px]" />
+        <XMarkIcon className="h-[15px] w-[15px]" />
       </button>
     </div>
   );

@@ -1,18 +1,18 @@
 import Head from "next/head";
+import { Footer } from "../components/Footer";
 import Home from "./Home/Home";
 
 export default function Web() {
   return (
-    <div>
+    <div className="flex flex-col h-screen">
       <Head>
-        {/** temporary title + icon */}
         <title>domain generator</title>
-        {/* <link rel="icon" href="/assets/dog.png" /> */}
       </Head>
 
-      <main>
+      <main className="flex flex-col items-center h-full">
         <Home />
       </main>
+      <Footer />
     </div>
   );
 }

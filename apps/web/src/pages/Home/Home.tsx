@@ -22,20 +22,22 @@ const Home = () => {
   };
 
   return (
-    <div className="p-16">
-      <h1 className="font-extrabold mb-6">focus on the product, not the name</h1>
-      <form className="flex flex-col gap-3" onSubmit={(e) => e.preventDefault()}>
+    <div className="w-[600px] pt-8">
+      <h1 className="font-extrabold py-[22px] text-center text-[36px] ">
+        focus on the product, not the name
+      </h1>
+      <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
         <div className="flex flex-col gap-[5px]">
-          <label htmlFor="company-description" className="text-xs font-semibold pl-3">
-            What is your product about?
+          <label htmlFor="company-description" className="text-[24px] font-semibold px-[5px]">
+            describe your product
           </label>
           <textarea
             className="form-control
           block
           w-full
-          px-3
-          py-1.5
-          text-[10px]
+          px-4
+          py-2
+          text-[16px]
           font-normal
           bg-[#2d2d2d]
           border border-solid border-product-purple
@@ -49,11 +51,14 @@ const Home = () => {
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             id="company-description"
-            rows={15}
+            rows={5}
           />
         </div>
         <TagSection />
-        <button className="w-full bg-product-purple rounded-lg" type="button" onClick={onSubmit}>
+        <button
+          className="w-full bg-product-purple rounded-lg py-5 text-[16px] font-medium leading-none"
+          type="button"
+          onClick={onSubmit}>
           generate names
         </button>
       </form>

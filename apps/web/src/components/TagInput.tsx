@@ -7,7 +7,7 @@ interface Props extends React.HTMLAttributes<HTMLInputElement> {
 
 const TagInput = ({ onChange, value, ...props }: Props) => {
   return (
-    <div className="flex items-center justify-start border border-solid border-product-purple bg-[#2d2d2d] rounded-lg pl-3">
+    <div className="flex items-center justify-start border border-solid border-product-purple bg-[#2d2d2d] rounded-lg pl-4">
       <span>
         <TagsIcon />
       </span>
@@ -15,9 +15,9 @@ const TagInput = ({ onChange, value, ...props }: Props) => {
         className="form-control
           block
           w-full
-          px-[10px]
-          py-1.5
-          text-[10px]
+          px-[16px]
+          py-2
+          text-[16px]
           bg-[#2d2d2d]
           font-normal
           transition
