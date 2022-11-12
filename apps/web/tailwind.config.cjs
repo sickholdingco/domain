@@ -12,6 +12,7 @@ module.exports = {
         primary: "var(--color-primary)",
         secondary: "var(--color-secondary)",
         brand: "#191234",
+        "product-purple": "#7773c7",
       },
       textColor: {
         default: "var(--color-text)",
