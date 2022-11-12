@@ -23,7 +23,7 @@ export const Footer = () => {
       <div className="w-full flex justify-center">
         <ul className="relative grid grid-cols-2 gap-4 sm:grid-cols-2">
           {links.map((link) => (
-            <li>
+            <li key={link.url}>
               <a
                 className="flex items-center justify-center w-6 h-6"
                 href={link.url}

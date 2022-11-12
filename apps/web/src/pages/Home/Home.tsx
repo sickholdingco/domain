@@ -22,8 +22,8 @@ const Home = () => {
   };
 
   return (
-    <div className="w-[600px] pt-8">
-      <h1 className="font-extrabold py-[22px] text-center text-[36px] ">
+    <div className="max-w-[600px] min-w-[300px] pt-8 px-4 sm:px-0">
+      <h1 className="font-extrabold py-[22px] text-center text-[36px] leading-[1.25] sm:leading-normal ">
         focus on the product, not the name
       </h1>
       <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
