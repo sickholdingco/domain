@@ -7,7 +7,6 @@ const Home = () => {
   const [result, setResult] = useState();
 
   const onSubmit = async (e: React.SyntheticEvent) => {
-    console.log("submit");
     e.preventDefault();
     const response = await fetch("/api/generate", {
       method: "POST",
