@@ -23,8 +23,14 @@ const Home = () => {
 
   return (
     <div className="max-w-[600px] min-w-[300px] pt-8 px-4 sm:px-0">
-      <h1 className="font-extrabold py-[22px] text-center text-[36px] leading-[1.25] sm:leading-normal ">
+      <h1 className="font-extrabold py-[22px] text-center text-[36px] leading-[1.25] sm:leading-normal hidden sm:block ">
         focus on the product, not the name
+      </h1>
+      <h1 className="font-extrabold text-center text-[36px] leading-[1.25] sm:leading-normal hidden smMax:block ">
+        focus on the product,
+      </h1>
+      <h1 className="font-extrabold pb-[22px] text-center text-[36px] leading-[1.25] sm:leading-normal hidden smMax:block ">
+        not the name
       </h1>
       <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
         <div className="flex flex-col gap-[5px]">
