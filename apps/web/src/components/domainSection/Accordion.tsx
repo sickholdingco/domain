@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import Content from "./Content";
 import NameSection from "./NameSection";
 import Pill from "./Pill";
 
@@ -46,16 +47,7 @@ const AccordionItem = () => {
         style={{
           height: isOpen ? ref.current?.scrollHeight : 0,
         }}>
-        <div className="w-full h-2" />
-        <div className="flex gap-2">
-          <Pill active kind="web" />
-          <Pill active kind="ens" />
-        </div>
-        <ul className="mt-5 flex flex-col gap-3 list-none">
-          <NameSection />
-          <NameSection />
-          <NameSection />
-        </ul>
+        <Content />
       </div>
     </li>
   );
