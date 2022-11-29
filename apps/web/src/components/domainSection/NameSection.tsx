@@ -7,6 +7,8 @@ interface Props {
 const NameSection = ({ domain }: Props) => {
   const color = domain === "web" ? "#FF803F" : "#22BDFF";
 
+  console.log(domain);
+
   return (
     <li
       className="[&:not(:last-child)]:border-b"

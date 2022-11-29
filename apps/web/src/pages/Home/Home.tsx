@@ -73,6 +73,7 @@ const Home = () => {
         <h1 className="py-[22px] text-left text-[24px] font-semibold px-[5px]">your next company name</h1>
         <div>
           <Accordion />
+          <Accordion />
         </div>
       </div>
     </div>

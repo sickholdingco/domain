@@ -1,12 +1,23 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import NameSection from "./NameSection";
 import Pill from "./Pill";
 
-const Content = () => {
+interface Props {
+  isOpen: boolean;
+}
+
+const Content = ({ isOpen }: Props) => {
+  const ref = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState<"web" | "ens">("web");
 
   return (
-    <>
+    <div
+      className="overflow-hidden 
+        transition-all duration-100 ease-in-out"
+      ref={ref}
+      style={{
+        height: isOpen ? ref.current?.scrollHeight : 0,
+      }}>
       <div className="w-full h-2" />
       <div className="flex gap-2">
         <Pill active={active === "web"} kind="web" onClick={() => setActive("web")} />
@@ -16,7 +27,7 @@ const Content = () => {
         <NameSection domain={active} />
         <NameSection domain={active} />
       </ul>
-    </>
+    </div>
   );
 };
 
