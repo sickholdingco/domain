@@ -1,8 +1,8 @@
 const NameSection = () => {
   return (
-    <div className="px-4 pt-5 pb-3">
-      <div className="flex items-center justify-between w-full px-3 py-2 text-sm font-medium text-left text-white rounded-lg relative">
-        <span>Section 1</span>
+    <li className="[&:not(:last-child)]:border-b border-b-product-purple">
+      <div className="flex items-center justify-between w-full px-3 py-2 text-sm font-medium text-left text-white rounded-lg ">
+        <span>pooper scooper</span>
         <svg
           className="w-5 h-5 transition-all duration-100 ease-linear"
           xmlns="http://www.w3.org/2000/svg"
@@ -15,9 +15,9 @@ const NameSection = () => {
             clipRule="evenodd"
           />
         </svg>
-        <span className="absolute bottom-0 left-0 w-full h-[1px] bg-product-purple" />
+        {/* <span className="absolute bottom-0 left-0 w-full h-[1px] bg-product-purple" /> */}
       </div>
-    </div>
+    </li>
   );
 };
 

@@ -7,10 +7,9 @@ const Pill = ({ kind = "web", active = false }: Props) => {
 
   return (
     <div
-      className={`rounded-2xl border border-[${color}] border-solid ${
-        active && `bg-[${color}]`
-      } w-fit max-w-[100px] py-[6px] px-4`}>
-      web
+      className="rounded-2xl w-fit max-w-[100px] py-[6px] px-4"
+      style={{ backgroundColor: active ? color : "transparent", border: `1px solid ${color}` }}>
+      {kind}
     </div>
   );
 };

@@ -20,11 +20,11 @@ const AccordionItem = () => {
   const toggle = () => setIsOpen((prev) => !prev);
 
   return (
-    <li className="mb-2">
+    <li className="mb-2 border-solid border border-product-purple rounded-lg w-full px-4 py-3">
       <button
-        className="flex items-center justify-between w-full px-4 py-3 text-sm font-medium text-left text-white rounded-lg border-solid border border-product-purple"
+        className="flex items-center justify-between w-full text-sm font-medium text-left text-white"
         onClick={toggle}>
-        <span>Section 1</span>
+        <span>pooper scooper</span>
         <svg
           className="w-5 h-5 transition-all duration-100 ease-linear"
           style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}
@@ -40,16 +40,22 @@ const AccordionItem = () => {
         </svg>
       </button>
       <div
-        className="mt-2 overflow-hidden 
+        className="overflow-hidden 
         transition-all duration-100 ease-in-out"
         ref={ref}
         style={{
           height: isOpen ? ref.current?.scrollHeight : 0,
         }}>
-        <Pill />
-        <NameSection />
-        <NameSection />
-        <NameSection />
+        <div className="w-full h-2" />
+        <div className="flex gap-2">
+          <Pill active kind="web" />
+          <Pill active kind="ens" />
+        </div>
+        <ul className="mt-5 flex flex-col gap-3 list-none">
+          <NameSection />
+          <NameSection />
+          <NameSection />
+        </ul>
       </div>
     </li>
   );
