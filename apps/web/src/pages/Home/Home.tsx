@@ -2,54 +2,24 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import Accordion from "../../components/domainSection/Accordion";
 import TagSection from "../../components/TagSection";
-import { ENS } from "@ensdomains/ensjs";
-import { ethers } from "ethers";
-import { useGetOpenAiData } from "../../api/useGetOpenAiData";
+import { ENSInstance, provider } from "../../config/ens";
+import { useGetServiceData } from "../../api/useGetServiceData";
 
 const Home = () => {
   const [searchInput, setSearchInput] = useState("");
+  const { data, isLoading, isError, isFetching, refetch } = useGetServiceData(searchInput);
 
-  const { data, isLoading, isFetching, refetch } = useGetOpenAiData(searchInput);
+  useEffect(() => {
+    const setConfig = async () => {
+      await ENSInstance.setProvider(provider);
+    };
+    setConfig();
+  }, []);
 
   const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     refetch();
   };
-
-  const provider = new ethers.providers.JsonRpcProvider(
-    "https://mainnet.infura.io/v3/806cc478903344c1bbea62753fb1e642"
-  );
-  const ENSInstance = new ENS();
-
-  useEffect(() => {
-    const setEnsProvider = async () => {
-      await ENSInstance.setProvider(provider);
-    };
-    setEnsProvider();
-  }, []);
-
-  // useEffect(() => {
-  //   searchForEnsNames(data);
-  // }, [data]);
-
-  // const searchForEnsNames = async (openAiOutput: string[]) => {
-  //   let formattedDomains: string[];
-  //   formattedDomains = [];
-  //   openAiOutput.forEach((domain) => {
-  //     formattedDomains.push(domain.split(" ").join("").concat(".eth") as string);
-  //   });
-  //   try {
-  //     console.log(formattedDomains);
-  //     const batched = await ENSInstance.batch(
-  //       ENSInstance.getAvailable.batch(formattedDomains[0]!),
-  //       ENSInstance.getAvailable.batch(formattedDomains[1]!),
-  //       ENSInstance.getAvailable.batch(formattedDomains[2]!)
-  //     );
-  //     console.log(batched);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   return (
     <div className="max-w-[600px] min-w-[300px] pt-8 px-4 sm:px-0">
@@ -98,16 +68,25 @@ const Home = () => {
           {isLoading || isFetching ? <span>loading...</span> : <span>generate names</span>}
         </button>
       </form>
-      {data &&
-        data.map((name: string) => {
-          return <div> {name} </div>;
-        })}
       <div>
-        <h1 className="py-[22px] text-left text-[24px] font-semibold px-[5px]">your next company name</h1>
-        <div>
-          <Accordion />
-          <Accordion />
-        </div>
+        {(isError || (data && data.status === "FAILURE")) && (
+          <div
+            className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mt-4"
+            role="alert">
+            <strong className="font-bold">an unexpected error occured!</strong>
+            <span className="block sm:inline"> please try again later.</span>
+          </div>
+        )}
+        {data && data.status === "SUCCESS" && (
+          <h1 className="py-4 text-left text-[24px] font-semibold px-[5px]">your next company name</h1>
+        )}
+        {data &&
+          data.status === "SUCCESS" &&
+          data.data.map((val) => {
+            return (
+              <Accordion companyName={val.companyName} ensName={val.ensName} available={val.available} />
+            );
+          })}
       </div>
     </div>
   );

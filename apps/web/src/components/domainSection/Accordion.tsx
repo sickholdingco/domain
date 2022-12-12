@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { DataType } from "../../config/types";
 import Content from "./Content";
 
-const Accordion = () => {
+const Accordion = ({ companyName, ensName, available }: DataType) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen((prev) => !prev);
@@ -11,7 +12,7 @@ const Accordion = () => {
         <button
           className="flex items-center justify-between w-full text-sm font-medium text-left text-white"
           onClick={toggle}>
-          <span>pooper scooper</span>
+          <span>{companyName}</span>
           <svg
             className="w-5 h-5 transition-all duration-100 ease-linear"
             style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}
@@ -26,7 +27,7 @@ const Accordion = () => {
             />
           </svg>
         </button>
-        <Content isOpen={isOpen} />
+        <Content isOpen={isOpen} ensName={ensName} available={available} />
       </div>
     </div>
   );
