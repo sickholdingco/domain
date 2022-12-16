@@ -2,7 +2,7 @@ import { useState } from "react";
 import { DataType } from "../../config/types";
 import Content from "./Content";
 
-const Accordion = ({ companyName, ensNames, available }: DataType) => {
+const Accordion = ({ companyName, ensNames, available, domainAvailable, domainNames }: DataType) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen((prev) => !prev);
@@ -27,7 +27,13 @@ const Accordion = ({ companyName, ensNames, available }: DataType) => {
             />
           </svg>
         </button>
-        <Content isOpen={isOpen} ensNames={ensNames} available={available} />
+        <Content
+          isOpen={isOpen}
+          ensNames={ensNames}
+          available={available}
+          domainNames={domainNames}
+          domainAvailable={domainAvailable}
+        />
       </div>
     </div>
   );

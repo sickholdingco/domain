@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { ENSInstance, provider } from "../config/ens";
 import { useQuery } from "react-query";
 import { DataType, OpenAIResponseType, UseQueryResponseType, FormattedEnsType } from "../config/types";
@@ -14,6 +15,25 @@ const batchEnsCall = async (domain: FormattedEnsType) => {
     ENSInstance.getAvailable.batch(domain.nameTag2)
   );
   return batched;
+};
+
+const getDomainAvailability = async (domain: string) => {
+  try {
+    const data = await fetch(`/api/whois/${domain}`);
+    const response = await data.json();
+
+    return response.available;
+  } catch (err) {
+    return false;
+  }
+};
+
+const createWebDomains = (name: string) => {
+  return [
+    name.replace(/[ .]/g, "").concat(".com").toLowerCase(),
+    name.replace(/[ .]/g, "").concat(".net").toLowerCase(),
+    name.replace(/[ .]/g, "").concat(".io").toLowerCase(),
+  ];
 };
 
 export const useGetServiceData = (description: string, tags: { id: string; tag: string }[]) => {
@@ -53,7 +73,20 @@ export const useGetServiceData = (description: string, tags: { id: string; tag: 
       const formattedData: DataType[] = [];
       if (response) {
         for (let i = 0; i < 3; i++) {
+          const domains = createWebDomains(openAiOutput[i]!);
           const batched = await batchEnsCall(formattedDomains[i]!);
+
+          const domainAvailability = await Promise.all(
+            domains.map(async (domain) => {
+              if (domain.endsWith(".io")) {
+                return true;
+              } else {
+                const available = await getDomainAvailability(domain);
+                return available;
+              }
+            })
+          );
+
           formattedData.push({
             companyName: openAiOutput[i]!,
             ensNames: [
@@ -62,8 +95,11 @@ export const useGetServiceData = (description: string, tags: { id: string; tag: 
               formattedDomains[i]!.nameTag2,
             ],
             available: [batched![0]!, batched![1]!, batched![2]!],
+            domainNames: domains,
+            domainAvailable: domainAvailability,
           });
         }
+
         return {
           data: formattedData,
           status: "SUCCESS",
