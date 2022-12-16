@@ -31,7 +31,7 @@ export const useGetServiceData = (description: string, tags: { id: string; tag: 
       ).json();
 
       const openAiOutput = response.result.split(", ");
-      let formattedDomains: FormattedEnsType[] = [];
+      const formattedDomains: FormattedEnsType[] = [];
 
       openAiOutput.forEach((domain: string) => {
         const names = {
