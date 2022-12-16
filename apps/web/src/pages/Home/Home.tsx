@@ -101,7 +101,13 @@ const Home = () => {
           data.status === "SUCCESS" &&
           data.data.map((val) => {
             return (
-              <Accordion companyName={val.companyName} ensNames={val.ensNames} available={val.available} />
+              <Accordion
+                companyName={val.companyName}
+                ensNames={val.ensNames}
+                available={val.available}
+                domainAvailable={val.domainAvailable}
+                domainNames={val.domainNames}
+              />
             );
           })}
       </div>

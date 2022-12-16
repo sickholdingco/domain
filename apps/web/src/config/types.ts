@@ -2,6 +2,8 @@ export type DataType = {
   companyName: string;
   ensNames: string[];
   available: boolean[];
+  domainNames: string[];
+  domainAvailable: boolean[];
 };
 
 export type EnsType = {

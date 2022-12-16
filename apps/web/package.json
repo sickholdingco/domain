@@ -19,7 +19,8 @@
     "react-dom": "^18.2.0",
     "react-query": "^3.39.2",
     "tailwindcss-fluid-type": "^2.0.3",
-    "ui": "workspace:*"
+    "ui": "workspace:*",
+    "whois": "^2.14.0"
   },
   "devDependencies": {
     "@types/node": "^17.0.12",

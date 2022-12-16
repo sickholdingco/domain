@@ -5,12 +5,16 @@ interface Props {
   domain: "web" | "ens";
   ensName: string;
   available: boolean;
+  domainName: string;
+  domainAvailable: boolean;
 }
-const NameSection = ({ domain, ensName, available }: Props) => {
+const NameSection = ({ domain, ensName, available, domainAvailable, domainName }: Props) => {
   const displayText = available ? ensName : ensName + " ❌";
+  const domainDisplayText = domainAvailable ? domainName : domainName + " ❌";
   const color = domain === "web" ? "#FF803F" : "#22BDFF";
   const imagePath = domain === "web" ? webImage : ensImage;
   const ensLink = `https://app.ens.domains/name/${ensName}/register`;
+  const domainLink = `https://www.namecheap.com/domains/registration/results/?domain=${domainName}`;
   return (
     <li
       className="[&:not(:last-child)]:border-b"
@@ -25,7 +29,13 @@ const NameSection = ({ domain, ensName, available }: Props) => {
             </a>
           </span>
         )}
-        {domain === "web" && <span>temporarydomain.com</span>}
+        {domain === "web" && (
+          <span>
+            <a href={domainLink} target="_blank" rel="noopener noreferrer">
+              {domainDisplayText}
+            </a>
+          </span>
+        )}
         <Image src={imagePath} alt="domain" />
       </div>
     </li>
