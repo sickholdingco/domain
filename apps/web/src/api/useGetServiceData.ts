@@ -36,8 +36,16 @@ export const useGetServiceData = (description: string, tags: { id: string; tag: 
       openAiOutput.forEach((domain: string) => {
         const names = {
           name: domain.replace(/[ .]/g, "").concat(".eth").toLowerCase() as string,
-          nameTag1: domain.replace(/[ .]/g, "").concat(tags[0]!.tag).concat(".eth").toLowerCase() as string,
-          nameTag2: domain.replace(/[ .]/g, "").concat(tags[1]!.tag).concat(".eth").toLowerCase() as string,
+          nameTag1: domain
+            .replace(/[ .]/g, "")
+            .concat(tags[0]!.tag.split(" ").join(""))
+            .concat(".eth")
+            .toLowerCase() as string,
+          nameTag2: domain
+            .replace(/[ .]/g, "")
+            .concat(tags[1]!.tag.split(" ").join(""))
+            .concat(".eth")
+            .toLowerCase() as string,
         };
         formattedDomains.push(names);
       });
