@@ -29,8 +29,6 @@ const Home = () => {
     }
   };
 
-  console.log("data", data);
-
   return (
     <div className="max-w-[600px] min-w-[300px] pt-8 px-4 sm:px-0">
       <h1 className="font-extrabold py-[22px] text-center text-[36px] leading-[1.25] sm:leading-normal hidden sm:block ">

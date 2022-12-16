@@ -7,13 +7,10 @@ const getWhois = (domain: string) => {
   return new Promise((resolve, reject) => {
     whois.lookup(`${domain}`, function (err, data) {
       if (err) {
-        console.log("err", err);
         return reject(err);
       }
 
       const firstLine = data.split("\n")[0];
-
-      console.log("data", data);
 
       if (firstLine.includes("No match for domain")) {
         return resolve({ available: true });
