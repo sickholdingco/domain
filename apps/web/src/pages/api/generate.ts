@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import OpenApiService from "../../api/openai-service";
+import OpenAIService from "../../api/openai-service";
 
 const generate = async (req: NextApiRequest, res: NextApiResponse) => {
-  const result = await OpenApiService.generateName(req.body.companyDescription);
+  const result = await OpenAIService.generateName(req.body.description, req.body.tags);
   res.status(200).json({ result });
 };
 

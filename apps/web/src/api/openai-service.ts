@@ -5,33 +5,32 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-const generateName = async (description: string) => {
+const FINE_TUNED_MODEL = "ada:ft-personal-2022-12-16-01-00-04";
+
+const generateName = async (description: string, tags: { id: string; tag: string }[]) => {
+  const prompt = formatPrompt(description, tags);
+
   const completion = await openai
     .createCompletion({
-      model: "text-davinci-002",
-      prompt: generatePrompt(description),
-      temperature: 0.6,
+      model: FINE_TUNED_MODEL,
+      prompt,
+      temperature: 0.7,
     })
     .catch(() => {
       throw new Error("Error finding completion");
     });
 
-  if (completion.data.choices && completion.data.choices[0]) {
-    return completion.data.choices[0].text;
+  if (completion.data.choices && completion.data.choices[0] && completion.data.choices[0].text) {
+    const separators = /[ ,\n]/g;
+    const names = completion.data.choices[0].text.split(separators).filter((item) => item);
+    return names;
   }
 
-  return "nothing";
+  return [];
 };
 
-const generatePrompt = (description: string) => {
-  return `Suggest three names for an animal that is a superhero.
-
-  Animal: Cat
-  Names: Captain Sharpclaw, Agent Fluffball, The Incredible Feline
-  Animal: Dog
-  Names: Ruff the Protector, Wonder Canine, Sir Barks-a-Lot
-  Animal: ${description}
-  Names:`;
+const formatPrompt = (description: string, tags: { id: string; tag: string }[]) => {
+  return `${description}\nTags:${tags.map((tag) => tag.tag).join(", ")}\n\n###\n\n`;
 };
 
 const OpenAIService = { generateName };

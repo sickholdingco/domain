@@ -26,11 +26,11 @@ export const useGetServiceData = (description: string, tags: { id: string; tag: 
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ companyDescription: description }),
+          body: JSON.stringify({ description, tags }),
         })
       ).json();
 
-      const openAiOutput = response.result.split(", ");
+      const openAiOutput = response.result;
       const formattedDomains: FormattedEnsType[] = [];
 
       openAiOutput.forEach((domain: string) => {

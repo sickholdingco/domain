@@ -10,7 +10,7 @@ export type EnsType = {
 };
 
 export type OpenAIResponseType = {
-  result: string;
+  result: string[];
 };
 
 export type UseQueryResponseType = {

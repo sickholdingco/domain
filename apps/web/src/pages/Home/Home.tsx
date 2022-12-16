@@ -6,12 +6,11 @@ import { ENSInstance, provider } from "../../config/ens";
 import { useGetServiceData } from "../../api/useGetServiceData";
 
 const Home = () => {
-  const [searchInput, setSearchInput] = useState("");
+  const [description, setDescription] = useState("");
   const [isMisinputError, setIsMisinputError] = useState(false);
   const [tags, setTags] = useState<Array<{ id: string; tag: string }>>([]);
-  const [tag, setTag] = useState("");
 
-  const { data, isLoading, isError, isFetching, refetch } = useGetServiceData(searchInput, tags);
+  const { data, isLoading, isError, isFetching, refetch } = useGetServiceData(description, tags);
 
   useEffect(() => {
     const setConfig = async () => {
@@ -22,7 +21,7 @@ const Home = () => {
 
   const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    if (searchInput.length === 0 || tags.length < 2) {
+    if (description.length === 0 || tags.length < 2) {
       setIsMisinputError(true);
     } else {
       setIsMisinputError(false);
@@ -63,13 +62,13 @@ const Home = () => {
           focus:outline-none
           "
             placeholder="it will revolutionize the shipping industry by offering low cost data for your exports"
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             id="company-description"
             rows={5}
           />
         </div>
-        <TagSection setTag={setTag} setTags={setTags} tags={tags} tag={tag} />
+        <TagSection tags={tags} setTags={setTags} />
         <button
           className="w-full bg-product-purple rounded-lg py-5 text-[16px] font-medium leading-none"
           type="button"
@@ -94,7 +93,9 @@ const Home = () => {
           </div>
         )}
         {data && data.status === "SUCCESS" && (
-          <h1 className="py-4 text-left text-[24px] font-semibold px-[5px]">your next company name</h1>
+          <h1 className="pt-4 pb-[5px] text-left text-[24px] font-semibold px-[5px]">
+            your next company name
+          </h1>
         )}
         {data &&
           data.status === "SUCCESS" &&
