@@ -93,7 +93,9 @@ const Home = () => {
           </div>
         )}
         {data && data.status === "SUCCESS" && (
-          <h1 className="py-4 text-left text-[24px] font-semibold px-[5px]">your next company name</h1>
+          <h1 className="pt-4 pb-[5px] text-left text-[24px] font-semibold px-[5px]">
+            your next company name
+          </h1>
         )}
         {data &&
           data.status === "SUCCESS" &&
