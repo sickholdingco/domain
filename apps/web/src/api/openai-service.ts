@@ -14,7 +14,7 @@ const generateName = async (description: string, tags: { id: string; tag: string
     .createCompletion({
       model: FINE_TUNED_MODEL,
       prompt,
-      temperature: 0.5,
+      temperature: 0.7,
     })
     .catch(() => {
       throw new Error("Error finding completion");
