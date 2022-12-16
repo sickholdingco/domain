@@ -1,23 +1,33 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Accordion from "../../components/domainSection/Accordion";
 import TagSection from "../../components/TagSection";
+import { ENSInstance, provider } from "../../config/ens";
+import { useGetServiceData } from "../../api/useGetServiceData";
 
 const Home = () => {
   const [searchInput, setSearchInput] = useState("");
-  const [result, setResult] = useState();
+  const [isMisinputError, setIsMisinputError] = useState(false);
+  const [tags, setTags] = useState<Array<{ id: string; tag: string }>>([]);
+  const [tag, setTag] = useState("");
+
+  const { data, isLoading, isError, isFetching, refetch } = useGetServiceData(searchInput, tags);
+
+  useEffect(() => {
+    const setConfig = async () => {
+      await ENSInstance.setProvider(provider);
+    };
+    setConfig();
+  }, []);
 
   const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    const response = await fetch("/api/generate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ companyDescription: searchInput }),
-    });
-
-    const data = await response.json();
-    setResult(data.result);
+    if (searchInput.length === 0 || tags.length < 2) {
+      setIsMisinputError(true);
+    } else {
+      setIsMisinputError(false);
+      refetch();
+    }
   };
 
   return (
@@ -59,15 +69,41 @@ const Home = () => {
             rows={5}
           />
         </div>
-        <TagSection />
+        <TagSection setTag={setTag} setTags={setTags} tags={tags} tag={tag} />
         <button
           className="w-full bg-product-purple rounded-lg py-5 text-[16px] font-medium leading-none"
           type="button"
           onClick={onSubmit}>
-          generate names
+          {isLoading || isFetching ? <span>loading...</span> : <span>generate names</span>}
         </button>
       </form>
-      <div>{result}</div>
+      <div>
+        {(isError || (data && data.status === "FAILURE")) && (
+          <div
+            className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mt-4"
+            role="alert">
+            <strong className="font-bold">an unexpected error occured!</strong>
+            <span className="block sm:inline"> please try again later.</span>
+          </div>
+        )}
+        {isMisinputError && (
+          <div
+            className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mt-4"
+            role="alert">
+            <span>please add a description and at least 2 tags!</span>
+          </div>
+        )}
+        {data && data.status === "SUCCESS" && (
+          <h1 className="py-4 text-left text-[24px] font-semibold px-[5px]">your next company name</h1>
+        )}
+        {data &&
+          data.status === "SUCCESS" &&
+          data.data.map((val) => {
+            return (
+              <Accordion companyName={val.companyName} ensNames={val.ensNames} available={val.available} />
+            );
+          })}
+      </div>
     </div>
   );
 };
