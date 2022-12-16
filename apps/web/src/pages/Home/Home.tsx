@@ -3,7 +3,8 @@ import { useState } from "react";
 import TagSection from "../../components/TagSection";
 
 const Home = () => {
-  const [searchInput, setSearchInput] = useState("");
+  const [description, setDescription] = useState("");
+  const [tags, setTags] = useState<Array<{ id: string; tag: string }>>([]);
   const [result, setResult] = useState();
 
   const onSubmit = async (e: React.SyntheticEvent) => {
@@ -13,7 +14,7 @@ const Home = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ companyDescription: searchInput }),
+      body: JSON.stringify({ description, tags }),
     });
 
     const data = await response.json();
@@ -53,13 +54,13 @@ const Home = () => {
           focus:outline-none
           "
             placeholder="it will revolutionize the shipping industry by offering low cost data for your exports"
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             id="company-description"
             rows={5}
           />
         </div>
-        <TagSection />
+        <TagSection tags={tags} setTags={setTags} />
         <button
           className="w-full bg-product-purple rounded-lg py-5 text-[16px] font-medium leading-none"
           type="button"
