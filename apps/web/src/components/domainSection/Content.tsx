@@ -4,11 +4,11 @@ import Pill from "./Pill";
 
 interface Props {
   isOpen: boolean;
-  ensName: string;
-  available: boolean;
+  ensNames: string[];
+  available: boolean[];
 }
 
-const Content = ({ isOpen, ensName, available }: Props) => {
+const Content = ({ isOpen, ensNames, available }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState<"web" | "ens">("web");
 
@@ -26,8 +26,9 @@ const Content = ({ isOpen, ensName, available }: Props) => {
         <Pill active={active === "ens"} kind="ens" onClick={() => setActive("ens")} />
       </div>
       <ul className="mt-5 flex flex-col gap-3 list-none">
-        <NameSection domain={active} ensName={ensName} available={available} />
-        <NameSection domain={active} ensName={ensName} available={available} />
+        <NameSection domain={active} ensName={ensNames[0]!} available={available[0]!} />
+        <NameSection domain={active} ensName={ensNames[1]!} available={available[1]!} />
+        <NameSection domain={active} ensName={ensNames[2]!} available={available[2]!} />
       </ul>
     </div>
   );

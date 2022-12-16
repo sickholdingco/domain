@@ -7,7 +7,7 @@ interface Props {
   available: boolean;
 }
 const NameSection = ({ domain, ensName, available }: Props) => {
-  const displayText = available ? ensName : ensName + " -> not available";
+  const displayText = available ? ensName : ensName + " ❌";
   const color = domain === "web" ? "#FF803F" : "#22BDFF";
   const imagePath = domain === "web" ? webImage : ensImage;
   const ensLink = `https://app.ens.domains/name/${ensName}/register`;
@@ -18,11 +18,14 @@ const NameSection = ({ domain, ensName, available }: Props) => {
         borderColor: color,
       }}>
       <div className="flex items-center justify-between w-full px-3 py-2 text-sm font-medium text-left text-white rounded-lg ">
-        <span>
-          <a href={ensLink} target="_blank" rel="noopener noreferrer">
-            {displayText}
-          </a>
-        </span>
+        {domain === "ens" && (
+          <span>
+            <a href={ensLink} target="_blank" rel="noopener noreferrer">
+              {displayText}
+            </a>
+          </span>
+        )}
+        {domain === "web" && <span>temporarydomain.com</span>}
         <Image src={imagePath} alt="domain" />
       </div>
     </li>

@@ -1,7 +1,7 @@
 export type DataType = {
   companyName: string;
-  ensName: string;
-  available: boolean;
+  ensNames: string[];
+  available: boolean[];
 };
 
 export type EnsType = {
@@ -16,4 +16,10 @@ export type OpenAIResponseType = {
 export type UseQueryResponseType = {
   data: DataType[];
   status: "SUCCESS" | "FAILURE";
+};
+
+export type FormattedEnsType = {
+  name: string;
+  nameTag1: string;
+  nameTag2: string;
 };
