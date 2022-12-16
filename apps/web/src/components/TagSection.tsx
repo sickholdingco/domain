@@ -2,19 +2,12 @@ import { useState } from "react";
 import TagInput from "./TagInput";
 import TopicTag from "./topicTag";
 
-interface TagSectionProps {
+interface Props {
   tags: { id: string; tag: string }[];
-  setTags: React.Dispatch<
-    React.SetStateAction<
-      {
-        id: string;
-        tag: string;
-      }[]
-    >
-  >;
+  setTags: React.Dispatch<React.SetStateAction<{ id: string; tag: string }[]>>;
 }
 
-const TagSection = ({ tags, setTags }: TagSectionProps) => {
+const TagSection = ({ tags, setTags }: Props) => {
   const [tag, setTag] = useState("");
 
   const handleEnter = (key: React.KeyboardEvent) => {
